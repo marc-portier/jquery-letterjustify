@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    </head>
+    <body>
+        
+        <div class="container">
+            <div class="jumbotron"><h1>Testing jQuery-letterjustify</h1></div>
+            <div class="row">
+                <div class="col-md-offset-1 col-md-2">Lorem ipsum dolor sit</div>
+                <div class="col-md-offset-1 col-md-2">amet consectetur adipiscing elit</div>
+                <div class="col-md-offset-1 col-md-2">sed do eiusmod tempor incididunt</div>
+                <div class="col-md-offset-1 col-md-2">labore dolore magna aliqua</div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-1 col-md-2 just">Lorem ipsum dolor sit</div>
+                <div class="col-md-offset-1 col-md-2 just">amet consectetur adipiscing elit</div>
+                <div class="col-md-offset-1 col-md-2 just">sed do eiusmod tempor incididunt</div>
+                <div class="col-md-offset-1 col-md-2 just">labore dolore magna aliqua</div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-1 col-md-2">Lorem ipsum dolor sit</div>
+                <div class="col-md-offset-1 col-md-2">amet consectetur adipiscing elit</div>
+                <div class="col-md-offset-1 col-md-2">sed do eiusmod tempor incididunt</div>
+                <div class="col-md-offset-1 col-md-2">labore dolore magna aliqua</div>
+            </div>
+        </div>
+    
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../src/js/jquery-2.1.1.min.js"><\/script>')</script>
+        <script src="../src/js/jquery-letterjustify.js"></script>
+     
+        <script type="text/javascript">
+            $(function(){
+                $('.just').letterjustify({"case": "upper"});
+            });
+        </script>
+    </body>
+</html>
