@@ -22,16 +22,6 @@ So jQuery will find them by using the selector '.letter-justify':
     $(function(){ $('.letter-justify').letterjustify(); });
 </script>
 ```
-###Result
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="/js/jquery-letterjustify.js"></script>
-<script src="https://raw.githubusercontent.com/marc-portier/jquery-letterjustify/master/src/js/jquery-letterjustify.js"></script>
-<div style="width: 100px" class="letter-justify">
-LetterJustify did justify this text!
-</div>
-<script type="text/javascript">
-    $(function(){ $('.letter-justify').letterjustify(); });
-</script>
 
 ##Credits 
 To designer [Marja Van De Ven](http://www.marjaworks.nl/) for the genious (altough non HTML-ready) design that needed this.
@@ -45,14 +35,12 @@ If you don't want words to be separated, you can glue them with &nbsp; like you 
 ```html
 <div style="width: 100px" class="letter-justify">LetterJustify will&nbsp;keep&nbsp;these together but simply split these</div>
 ```
-<div style="width: 100px" class="letter-justify">LetterJustify will&nbsp;keep&nbsp;these together but simply split these</div>
 
 ###add emphasis through &lt;em&gt; or * (asterisk)
 If you want to put emphasis on certain words in the text, you can mark them with * (asterisk) or &lt;em&gt; (html emphasis) tags.
 ```html
 <div style="width: 100px" class="letter-justify">LetterJustify will apply *emphasis* if you wish</div>
 ```
-<div style="width: 100px" class="letter-justify">LetterJustify will apply <em>emphasis</em> if you wish.</div>
 
 ###use configuration options
 ####Activate options through js
