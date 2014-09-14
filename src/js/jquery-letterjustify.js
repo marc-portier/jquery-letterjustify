@@ -75,6 +75,7 @@
       , "keep"  : "basic"
       , "emph"  : "on"
       , "lineScaling" : 0.60
+      , "widthScaling" : 0.75
     }
     
     var BARE = /[*]/g
@@ -161,21 +162,22 @@
         ;
         
         $span.text(bare);
-        $span.css('display', 'inline-block');
+        $span
+          .css('display', 'inline-block')
+        ;
         var txtWidth = $span.get(0).clientWidth;
         var txtHeight = $span.get(0).clientHeight;
-        //console.log("txt: " + txt + " has txtWidth = " + txtWidth + " and txtHeight = " + txtHeight);
         
         var tgtWidth = $span.parent().get(0).clientWidth;
-        //console.log("parentWidth = " + tgtWidth);
-        var ratio = 0.75 * tgtWidth / txtWidth;
+        var ratio = this.config.widthScaling * tgtWidth / txtWidth;
         var scale = (10 * Math.floor(10*ratio)) + "%";
         
-        $span.css('font-size', scale);
-        //hard-set the height for line spacing
-        $span.height(Math.ceil($span.height() * this.config.lineScaling) + "px"); 
-        
-        $span.html("");
+        $span
+          .css('font-size', scale)
+          //hard-set the height for line spacing
+          .height(Math.ceil($span.height() * this.config.lineScaling) + "px")
+          .html("")
+        ;
         
         for(var i = 0; i < txt.length; i++)
         {
@@ -186,8 +188,10 @@
                 continue;
             }
             var $ltr = $("<span>" + txt.charAt(i) + "</span>");
-            $ltr.css('display', 'inline-block');
-            $ltr.css('position', 'absolute');
+            $ltr
+              .css('display', 'inline-block')
+              .css('position', 'absolute')
+            ;
             if (emph) {
                 $ltr.css('font-weight', 900);
             }
@@ -198,8 +202,10 @@
 
             var indent = 100 * positionRatio;
             var offset = -textWidth * positionRatio;
-            $ltr.css('left', indent + "%");
-            $ltr.css('marginLeft', offset + "px");
+            $ltr
+              .css('left', indent + "%")
+              .css('marginLeft', offset + "px")
+            ;
         }
     }
     
