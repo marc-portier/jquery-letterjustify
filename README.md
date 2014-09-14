@@ -85,3 +85,15 @@ This enables or disables the emphasis-support. Just in case you don't like it to
 ####options.lineScaling = 0.60 (default) | your own 'double' value
 
 This option controls how lines are scaled: bigger values will give more whitespace between the lines.
+
+####options.widthScaling = 0.75 (default) | your own 'double' value
+
+This option controls how the width of the text is scaled to fit the width of the surounding box. Smaller values give more whitespace between the individual letters.
+
+####options.maxScaleRatio = 2 (default) | your own 'double' value
+
+This option sets a maximum to the scale-ratio applied to make the width of the text fit the width of the surounding box. 
+
+####options.minScaleRatio = 0.5 (default) | your own 'double' value
+
+This option sets a minimum to the scale-ratio applied to make the width of the text fit the width of the surounding box. 

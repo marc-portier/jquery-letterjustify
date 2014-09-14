@@ -76,6 +76,8 @@
       , "emph"  : "on"
       , "lineScaling" : 0.60
       , "widthScaling" : 0.75
+      , "minScaleRatio" : 0.5
+      , "maxScaleRatio" : 2
     }
     
     var BARE = /[*]/g
@@ -165,12 +167,18 @@
         $span
           .css('display', 'inline-block')
         ;
-        var txtWidth = $span.get(0).clientWidth;
-        var txtHeight = $span.get(0).clientHeight;
         
-        var tgtWidth = $span.parent().get(0).clientWidth;
-        var ratio = this.config.widthScaling * tgtWidth / txtWidth;
-        var scale = (10 * Math.floor(10*ratio)) + "%";
+        var txtWidth = $span.get(0).clientWidth
+          , txtHeight = $span.get(0).clientHeight
+          , tgtWidth = $span.parent().get(0).clientWidth
+          , ratio = Math.min( this.config.maxScaleRatio
+                            , Math.max(this.config.minScaleRatio
+                                      , (this.config.widthScaling * tgtWidth / txtWidth)
+                                      )
+                            )
+          , scale = (10 * Math.floor(10*ratio)) + "%"
+        ;
+        console.log
         
         $span
           .css('font-size', scale)
