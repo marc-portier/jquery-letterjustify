@@ -2,7 +2,7 @@
  jQuery letterjusify - http://github.com/marc-portier/jquery-letterjustify
 
  (c) 2014, Marc Portier
- CC-SA-BY license 4.0, see https://creativecommons.org/licenses/by-sa/4.0/
+ Unlicensed, see http://unlicense.org
 */
 ;
 ( function( $) {
