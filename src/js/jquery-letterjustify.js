@@ -58,6 +58,10 @@
     
     function LetterJustify($elm, config) {
         
+        var localConfig = $elm.data('letterjustify-config');
+        if (localConfig) {
+            config = jqMerge(config, localConfig);
+        }
         this.config = jqMerge(LetterJustify.config, config);
         $elm.data('letterjustify', this);
         this.$elm = $elm;
@@ -70,11 +74,13 @@
       , "break" : "smart"
       , "keep"  : "basic"
       , "emph"  : "on"
+      , "lineScaling" : 0.60
     }
     
     var BARE = /[*]/g
       , EMTAGS = /((<em>\s*)|(\s*<\/em>))/g
-      , BASIC = /[^*a-zA-Z0-9]/g
+      , BASIC = /[^*a-zA-Z0-9 ]/g
+      , WS = /[ \t]+/g
     ;
     LetterJustify.prototype.apply = function() {
         
@@ -88,7 +94,8 @@
             this.$elm.html(emptxt);
         }
         
-        var text = this.$elm.text();
+        // get the text and normalize the whitespace - but not the nbsp!
+        var text = this.$elm.text().replace(WS, " ");
         
         // only keep some chars
         if (this.config.keep == "basic") { 
@@ -138,35 +145,37 @@
             });
             
         }
-        var html = "<span>" + spans.join("</span><br><span>") + "</span>"; 
-        console.log("spans ==> ", spans);
+        var html = "<span>" + spans.join("</span><br><span>") + "</span>"
+          , me = this
+        ; 
+        
         this.$elm.html(html);
-        $('span', this.$elm).each(LetterJustify.justify);
+        $('span', this.$elm).each(function(){ me.justify(this); });
     }
-    LetterJustify.justify = function() {
-        var $this = $(this)
-          , txt = $this.text()
+    LetterJustify.prototype.justify = function(span) {
+        var $span = $(span)
+          , txt = $span.text()
           , emph = false
           , bare = txt.replace(BARE,"")
           , markers = 0
         ;
         
-        $this.text(bare);
-        $this.css('display', 'inline-block');
-        var txtWidth = $this.get(0).clientWidth;
-        var txtHeight = $this.get(0).clientHeight;
+        $span.text(bare);
+        $span.css('display', 'inline-block');
+        var txtWidth = $span.get(0).clientWidth;
+        var txtHeight = $span.get(0).clientHeight;
         //console.log("txt: " + txt + " has txtWidth = " + txtWidth + " and txtHeight = " + txtHeight);
         
-        var tgtWidth = $this.parent().get(0).clientWidth;
+        var tgtWidth = $span.parent().get(0).clientWidth;
         //console.log("parentWidth = " + tgtWidth);
         var ratio = 0.75 * tgtWidth / txtWidth;
         var scale = (10 * Math.floor(10*ratio)) + "%";
-        var height = Math.floor(txtHeight * ratio * 0.65) + "px";
         
-        $this.css('font-size', scale);
-        $this.height(height);
+        $span.css('font-size', scale);
+        //hard-set the height for line spacing
+        $span.height(Math.ceil($span.height() * this.config.lineScaling) + "px"); 
         
-        $this.html("");
+        $span.html("");
         
         for(var i = 0; i < txt.length; i++)
         {
@@ -182,7 +191,7 @@
             if (emph) {
                 $ltr.css('font-weight', 900);
             }
-            $this.append($ltr);
+            $span.append($ltr);
 
             var positionRatio = (i-markers) / (bare.length - 1);
             var textWidth = $ltr.get(0).clientWidth;
